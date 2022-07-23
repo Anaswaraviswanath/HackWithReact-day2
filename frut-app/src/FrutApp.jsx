@@ -1,7 +1,21 @@
 import { useState } from "react";
 function FrutApp() {
 
-  const [items,setItem]=useState([]);
+  const [items,setItem]=useState(["Apple 🍌","Watermelon 🍍","Rambutan🍎"]);
+  const [itemNo, setItemNo] = useState(0);
+  const [itemInput, setItemInput] = useState('');
+
+  const currentFrut=items[itemNo];
+  const handleNextClick=()=>{
+    setItemNo(itemNo+1);
+  }
+  const handleResetClick=()=>{
+    setItemNo(0);
+  }
+  const handleInput=(event)=>{
+    setItemInput(event.target.value);
+  }
+  
   return (
     <div>
       <div className="app">
@@ -11,7 +25,7 @@ function FrutApp() {
           </div>
           <div className="app__carousel">
             <span className="display--item">
-              Apple 🍌
+              {currentFrut}
             </span>
             {/* <span className="display--add">
               <span>End of the List</span>
@@ -19,7 +33,10 @@ function FrutApp() {
             </span> */}
           </div>
           <div className="app__next">
-            <button className="btn btn--primary">Next</button>
+            { currentFrut ?
+            <button onClick={handleNextClick} className="btn btn--primary">Next</button>
+            :<button onClick={handleNextClick} className="btn btn--primary">Goto start</button>
+}
             </div>
             <div className="app__add">
             <button className="btn btn--secondary">Add</button>
